@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符波浪形跳动</title>
+    <script src="jquery-2.1.4.min.js" type="text/javascript"></script>
+    <style >
+        .content {
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+            $(document).ready(function() {
+                var mytext=$(".content p").text(),//获取字符串
+                n=0,//波浪起始位置
+                timer;//定时器
+                function wave () {
+                    n++//改变波浪的起伏位置
+                    if (n > mytext.length) {n=1}
+                    var output="";
+                    for (i=0 ;i<mytext.length; i++){
+                        size = parseInt(72*Math.abs( Math.sin((i+n)/(mytext.length/3.14))));//用不同的余弦值设置字节的大小
+                        output+="<font style='font-size: "+ size +"pt'>" +mytext.substring(i,i+1)+ "</font>";//重新拼凑字符串
+                        // console.log(n+i);                      
+                    }
+                    $(".content p").html(output)
+                    // $(".content p").html(" ");
+                }
+                timer=setInterval(wave,100)
+            });
+
+    </script>
+</head>
+<body bgcolor="#fef4d9">
+    <div class="content">
+        <p>123456789</p>
+    </div>
+</body>
+</html>
