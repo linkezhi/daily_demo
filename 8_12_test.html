@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串打字显示效果</title>
+    <script src="jquery-2.1.4.min.js" type="text/javascript" charset="utf-8" ></script>
+    <script type="text/javascript">
+       
+        $(document).ready(function() {
+            typeit();
+          var text=$("#typing").text();//获取字符串对象
+           function typeit () {
+            var progress=0;//显示的字符索引
+            var timer;//计时器
+            var str;//提取后的字符串
+            timer= setInterval(function  () {
+            str=text.substr(0,progress);
+                console.log(str);
+
+        $("#typing").text(str+(progress & 1 ? "_" : " "))//与运算计算出的光标
+
+        if(progress > text.length)
+        {
+            clearInterval(timer)
+        }else{
+            progress++;
+            console.log(progress);
+        }
+        $("#typing").show();
+
+            }, 800)
+
+        }
+        });
+
+    </script>
+</head>
+<body>
+    <p id="typing" style="display:none">字符串逐个显示，实现类似打字的效果</p>
+</body>
+</html>

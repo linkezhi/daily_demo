@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>text_show</title>
+<script src="jquery-2.1.4.min.js" type="text/javascript" charset="utf-8" ></script>
+</head>
+<body>
+    <p id="typing" style=" display:none" >
+InsertAdjacentHTML 方法是比 innerHTML、outerHTML 属性更灵活的插入 HTML 代码的方法。它可以实现在一个 DOM 元素的前面、后面、第一个子元素前面、最后一个子元素后面四个位置，插入指定的 HTML 代码。不是 W3C 标准的 DOM 方法。
+这个方法最初是由 IE4.0 以上版本实现，为私有特性。详细内容请参见 MSDN 说明：insertAdjacentHTML Method。
+W3C 近期在 HTML5 草案中扩展了这个方法，更多详细的信息，请参见 W3C HTML5 草案：3.5.7 insertAdjacentHTML()。
+</p>
+</body>
+<script type="text/javascript">
+    var it = 0;
+    var mytext;
+    function initialize() {
+        // mytext = $("#typing").text();
+        var myheight = $("#typing").offsetHeight;
+        // $("#typing").text("");
+        $("#typing").css("height", myheight);
+        $("#typing").show();
+        typeit($("#typing"));
+}
+// var t;
+    // function typeit() {
+    //     $("#typing").append(mytext.charAt(it));
+    //     if (it < mytext.length - 1) {
+    //         it++
+    //         t = setTimeout("typeit()", 100);
+    //     }
+    //     else
+    //         clearTimeout(t);
+    // }
+    $(document).ready(function () {
+        initialize();
+    });
+function typeit(_this){
+            var $ele = $(_this), str = $ele.html(), progress = 0;
+            $ele.html('');
+            var timer = setInterval(function() {
+                var current = str.substr(progress, 1);//挑出每个字符进行检验
+                if (current == '<') {
+                    progress = str.indexOf('>', progress) + 1;
+                } else {
+                    progress++;
+                }
+//下面是在模拟光标        
+// console.log(current)      
+$ele.html(str.substring(0, progress) + (progress & 1 ? '_' : ''));//通过与运算确定光标的出现
+                if (progress >= str.length) {
+                    clearInterval(timer);
+                }
+            }, 100);
+
+        }
+    </script>
+//     <script type="text/javascript">
+//     var it = 0;
+//     var mytext;
+//     function initialize() {
+//         mytext = $("#typing").text();
+//         var myheight = $("#typing").offsetHeight;
+//         $("#typing").text("");
+//         $("#typing").css("height", myheight);
+//         $("#typing").show();
+//         typeit();
+// }
+// var t;
+//     function typeit() {
+//         $("#typing").append(mytext.charAt(it));
+//         if (it < mytext.length - 1) {
+//             it++
+//             t = setTimeout("typeit()", 100);
+//         }
+//         else
+//             clearTimeout(t);
+//     }
+//     $(document).ready(function () {
+//         initialize();
+//     });
+//     </script>
+</html>
