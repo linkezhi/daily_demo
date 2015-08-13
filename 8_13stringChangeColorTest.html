@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文字颜色逐个的改变</title>
+    <script src="jquery-2.1.4.min.js" type="text/javascript" charset="utf-8" ></script>
+    <style type="text/css" media="screen">
+    #mytext {
+        text-align: center;
+        color: blue;
+        font-size: 2em;
+    }
+        
+    </style>
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+        var mytext=$("#mytext").text();
+        var changeColor="red";
+        var timer;
+        var j=0;
+        function changeCharColor () {
+            str="<font>"
+            for (var i = 0;i < mytext.length; i++) {
+                if( j == i) {
+                    str += "<font color= "+ changeColor +">" + mytext.charAt(i) + "</font>";
+                    }else{
+                        str += mytext.charAt(i);
+                    }
+            };
+            str += "</font>";
+            console.log(str);
+            $("#mytext").html(str);
+            (j == mytext.length) ? j=0 : j++;
+             timer=setTimeout(changeCharColor, 100)
+        }
+        changeCharColor ();
+    });
+    </script>
+
+</head>
+<body>
+    <div id="mytext">文字颜色的改变</div>
+</body>
+</html>
